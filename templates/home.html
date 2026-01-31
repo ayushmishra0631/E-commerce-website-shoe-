@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nike Shoes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* [Previous CSS remains exactly the same until cart-btns] */
+
+/* Update cart-btns styling for two buttons */
+.cart-btns{
+  display:flex;flex-direction:column;gap:4px;width:70px;
+}
+
+/* Update remove-btn styling */
+.remove-btn{
+  background:#dc3545;color:#fff;border:none;border-radius:6px;padding:5px 8px;font-size:12px;
+  cursor:pointer;transition:.2s;
+}
+.remove-btn:hover{background:#b02a37;}
+
+/* Add buy button styling */
+.buy-cart-btn{
+  background:#ffc107;color:#000;border:none;border-radius:6px;padding:5px 8px;font-size:12px;
+  font-weight:600;cursor:pointer;transition:.2s;
+}
+.buy-cart-btn:hover{background:#ffca2c;}
+
+/* [Rest of CSS remains exactly the same] */
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
+body{background:radial-gradient(circle at top,#1b1b25,#0f0f14);color:#fff;overflow-x:hidden;}
+
+/* HEADER */
+header{
+  position:fixed;top:0;width:100%;z-index:1000;
+  padding:20px 60px;display:flex;justify-content:space-between;align-items:center;
+  background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);
+}
+.brand-logo{font-size:30px;font-weight:900;color:#ff6a00;text-decoration:none;}
+
+/* CART TOGGLE */
+.cart-toggle{
+  background:#ff6a00;color:#fff;
+  padding:10px 18px;border-radius:50px;
+  font-weight:600;cursor:pointer;
+}
+
+/* HERO SECTION */
+.product-card{margin-top:130px;background:linear-gradient(135deg,#0f0f14,#1b1b25);}
+.product-hero{
+  max-width:1300px;margin:auto;
+  padding:40px;
+  display:flex;align-items:center;justify-content:space-between;
+  min-height:500px;
+}
+.product-title{font-size:64px;font-weight:900;color:#ffc107;}
+
+/* FIXED HERO IMAGE SIZE */
+.hero-shoe{
+  width:500px;
+  height:380px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:12px;
+  transition:.4s;
+}
+.hero-shoe:hover{transform:rotate(-6deg) scale(1.03);}
+
+.product-bottom{
+  max-width:1300px;margin:auto;
+  padding:20px 40px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.price{font-size:28px;font-weight:600;color:#ffc107;}
+
+/* BUTTONS */
+.btn-custom {
+  width: 120px;
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: .3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-add-cart {
+  background: #ff4500;
+  color: #fff;
+}
+
+.btn-buy {
+  background: #ffc107;
+  color: #000;
+}
+
+/* PRODUCT GRID */
+.shoe-card{
+  background:linear-gradient(135deg,#1b1b25,#12121a);
+  border-radius:22px;padding:20px;display:flex;
+  flex-direction:column;height:100%;
+}
+.shoe-card img{max-height:180px;margin-bottom:10px;object-fit:contain;}
+.shoe-price{color:#ff6a00;font-weight:600;}
+
+.card-actions{
+  display:flex;gap:10px;justify-content:center;
+  margin-top:auto;
+}
+
+/* CART */
+.cart-box{
+  position:fixed;top:80px;right:20px;
+  width:360px;max-height:80vh;
+  background:#1b1b25;border-radius:20px;padding:20px;
+  transform:translateX(120%);transition:.35s;z-index:9999;
+  display:flex;flex-direction:column;
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+}
+.cart-box.open{transform:translateX(0);}
+
+#cartItems{
+  max-height:300px;overflow-y:auto;
+  border-top:2px dashed #ff6a00;border-bottom:2px dashed #ff6a00;
+  padding:10px 0;margin-bottom:10px;
+}
+.cart-item{display:flex;gap:10px;align-items:center;background:#2b2b35;padding:12px;border-radius:10px;margin-bottom:10px;}
+.cart-item img{
+  width:60px;height:60px;object-fit:contain;
+  background:#fff;border-radius:8px;padding:5px;
+}
+.cart-info{flex:1;font-size:14px;}
+
+/* SLOGAN CARD */
+.slogan-card{
+  max-width:1200px;margin:60px auto;
+  padding:20px;
+  height:300px;
+  border-radius:25px;
+  background:linear-gradient(135deg,#ff6a00,#ff8c00);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;
+}
+.slogan-text{flex:1;}
+.slogan-text h2{font-size:48px;font-weight:900;color:#fff;}
+.slogan-text p{font-size:18px;color:#fff;margin-top:10px;}
+
+.slogan-image img{
+  width:380px;
+  height:240px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:12px;
+}
+
+/* FOOTER */
+footer{background:#12121a;padding:60px 20px;color:#fff;}
+.footer-content{max-width:1200px;margin:auto;display:flex;flex-wrap:wrap;gap:30px;}
+.footer-section{flex:1 1 250px;}
+.footer-section h4{color:#ff6a00;margin-bottom:20px;}
+.footer-section a{color:#ffc107;text-decoration:none;}
+.footer-logo{width:40px;margin-right:10px;vertical-align:middle;}
+.footer-social img{width:28px;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  header{padding:16px 25px;}
+  .product-hero{flex-direction:column;text-align:center;min-height:420px;}
+  .product-title{font-size:40px;}
+  .hero-shoe{width:90%;height:auto;}
+
+  .cart-box{width:90%;right:5%;}
+  .cart-btns{width:60px;}
+  .remove-btn,.buy-cart-btn{font-size:11px;padding:4px 6px;}
+  
+  .slogan-card{flex-direction:column;height:auto;text-align:center;}
+  .slogan-image img{width:70%;height:auto;}
+}
+</style>
+</head>
+
+<body>
+<!-- [Header and product sections remain exactly the same] -->
+<header>
+  <a href="/home" class="brand-logo">Nike</a>
+  <div class="cart-toggle" onclick="toggleCart(event)">🛒 Cart (<span id="cartCount">0</span>)</div>
+</header>
+
+{% if hero_item %}
+<div class="product-card">
+  <div class="product-hero">
+    <div class="product-title">{{ hero_item.name }}</div>
+    <img class="hero-shoe" src="{{ url_for('static', filename='uploads/' + hero_item.image) }}">
+  </div>
+  <div class="product-bottom">
+    <div class="price">₹ {{ hero_item.price }}</div>
+    <button class="btn-custom btn-add-cart add-cart-btn"
+      data-name="{{ hero_item.name }}"
+      data-price="{{ hero_item.price }}"
+      data-image="{{ hero_item.image }}">Add to Cart</button>
+  </div>
+</div>
+{% endif %}
+
+<div class="container my-5">
+  <div class="row g-4">
+    {% for item in allmenu %}
+    <div class="col-lg-3 col-md-4 col-sm-6 d-flex">
+      <div class="shoe-card w-100">
+        <img src="{{ url_for('static', filename='uploads/' + item.image) }}">
+        <h5>{{ item.name }}</h5>
+        <p class="shoe-price">₹ {{ item.price }}</p>
+        <div class="card-actions">
+          <a href="{{ url_for('order1', image=item.image) }}" class="btn-custom btn-buy">Buy</a>
+          <button class="btn-custom btn-add-cart add-cart-btn"
+            data-name="{{ item.name }}"
+            data-price="{{ item.price }}"
+            data-image="{{ item.image }}">Add to cart</button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- CART - UPDATED WITH BUY BUTTON -->
+<div class="cart-box" id="cartBox" onclick="event.stopPropagation()">
+  <h5>🛒 Your Cart</h5>
+  <div id="cartItems"></div>
+  <p>Total Items: <span id="totalItems">0</span></p>
+  <p>Total Price: ₹ <span id="totalPrice">0</span></p>
+</div>
+
+<!-- [Slogan and footer remain exactly the same] -->
+<div class="slogan-card">
+  <div class="slogan-text">
+    <h2>Run Faster, Jump Higher, Look Cooler</h2>
+    <p>Experience unmatched comfort and style in every step you take.</p>
+  </div>
+  <div class="slogan-image">
+    {% if slogan_item %}
+      <img src="{{ url_for('static', filename='uploads/' + slogan_item.image) }}" alt="{{ slogan_item.name }}">
+    {% else %}
+      <img src="https://i.pinimg.com/736x/4c/40/e7/4c40e74f4b330950203093e52d0a31df.jpg" alt="Nike Shoe">
+    {% endif %}
+  </div>
+</div> 
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4><img class="footer-logo" src="https://logodix.com/logo/861847.jpg" alt="Nike Logo">About Nike</h4>
+      <p>We provide high-quality sneakers and apparel for all sports enthusiasts. Join the movement and stay ahead in style.</p>
+      <a href="/login">Thank You</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/logout">Logout</a></li>
+        <li><a href="/my-orders">cancle order</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact Us</h4>
+      <p>Email: <a href="mailto:ayushmishra0631@gmail.com">ayushmishra0631@gmail.com</a></p>
+      <p>Phone: +91 7683062545</p>
+      <p>Address: New Delhi</p>
+      <div class="footer-social mt-2">
+        <a href="https://www.instagram.com/ayushmishra_24">
+          <img src="https://images.icon-icons.com/835/PNG/512/instagram_icon-icons.com_66733.png" alt="Instagram">
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+/* =========================
+   FIRST TIME VISIT LOGIC
+========================= */
+if (!localStorage.getItem("nikeCartVisited")) {
+  localStorage.removeItem("cart");
+  localStorage.setItem("nikeCartVisited", "true");
+}
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const cartBox = document.getElementById("cartBox");
+
+/* =========================
+   PAGE LOAD
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
+  updateCart();
+
+  document.querySelectorAll(".add-cart-btn").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+
+      cart.push({
+        name: btn.dataset.name,
+        price: Number(btn.dataset.price),
+        image: btn.dataset.image
+      });
+
+      saveCart();
+      updateCart();
+      cartBox.classList.add("open");
+    });
+  });
+
+  document.addEventListener("click", () => {
+    cartBox.classList.remove("open");
+  });
+});
+
+/* =========================
+   CART TOGGLE
+========================= */
+function toggleCart(e) {
+  e.stopPropagation();
+  if (cart.length === 0) return;
+  cartBox.classList.toggle("open");
+}
+
+/* =========================
+   UPDATE CART (OLD BUY WORKING)
+========================= */
+function updateCart() {
+  const cartItemsEl = document.getElementById("cartItems");
+  const cartCountEl = document.getElementById("cartCount");
+  const totalItemsEl = document.getElementById("totalItems");
+  const totalPriceEl = document.getElementById("totalPrice");
+
+  cartItemsEl.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price;
+    cartItemsEl.innerHTML += `
+      <div class="cart-item">
+        <img src="/static/uploads/${item.image}">
+        <div class="cart-info">
+          <strong>${item.name}</strong><br>₹ ${item.price}
+        </div>
+        <div class="cart-btns">
+          <button class="buy-cart-btn"
+            onclick="buyItem(event, ${index}, '${item.image}')">
+            Buy
+          </button>
+          <button class="remove-btn"
+            onclick="removeItem(event, ${index})">
+            Cancel
+          </button>
+        </div>
+      </div>`;
+  });
+
+  cartCountEl.textContent = cart.length;
+  totalItemsEl.textContent = cart.length;
+  totalPriceEl.textContent = total;
+
+  if (cart.length === 0) cartBox.classList.remove("open");
+}
+
+/* =========================
+   BUY ITEM (OLD BEHAVIOR)
+========================= */
+function buyItem(e, index, image) {
+  e.stopPropagation();
+  cart.splice(index, 1);
+  saveCart();
+  updateCart();
+  window.location.href = `/order1/${encodeURIComponent(image)}`;
+}
+
+/* =========================
+   REMOVE ITEM
+========================= */
+function removeItem(e, index) {
+  e.stopPropagation();
+  cart.splice(index, 1);
+  saveCart();
+  updateCart();
+}
+
+/* =========================
+   SAVE CART
+========================= */
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+</script>
+
+</body>
+</html>

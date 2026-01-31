@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login | Nike</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1b1b25, #121218);
+  color: #eee;
+  padding-top: 90px; /* navbar space */
+  overflow-x: hidden;
+}
+
+/* ===== NAVBAR ===== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px clamp(20px,6vw,80px);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  color: #ff6a00;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #ccc;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.3s;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #ff6a00;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #ff6a00;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== MAIN CENTER WRAPPER ===== */
+.main-wrapper {
+  min-height: calc(100vh - 90px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* ===== LOGIN CARD ===== */
+.container-box {
+  display: flex;
+  width: 900px;
+  max-width: 100%;
+  background: #1e1e2a;
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  overflow: hidden;
+}
+
+/* LEFT IMAGE */
+.left {
+  flex: 1;
+  background: linear-gradient(160deg, #2a2a36, #1b1b25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.shoe {
+  width: 280px;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+  animation: floatShoe 5s ease-in-out infinite;
+}
+
+@keyframes floatShoe {
+  0% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-15px) rotate(6deg); }
+  100% { transform: translateY(0) rotate(-6deg); }
+}
+
+/* RIGHT FORM */
+.right {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-box {
+  width: 100%;
+  max-width: 320px;
+  background: #2a2a36;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.nike-small-logo {
+  width: 80px;
+  margin-bottom: 25px;
+  filter: brightness(0.9) contrast(1.2);
+}
+
+/* FORM ELEMENTS */
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ccc;
+  margin-bottom: 6px;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 1px solid #555;
+  font-size: 15px;
+  background: #1b1b25;
+  color: #eee;
+}
+
+input:focus {
+  outline: none;
+  border-color: #ff6a00;
+  box-shadow: 0 0 5px #ff6a00;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.forgot-password a {
+  font-size: 13px;
+  color: #999;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #444, #777);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(255,106,0,0.5);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .container-box {
+    flex-direction: column;
+  }
+  .left {
+    padding: 30px;
+  }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <a class="logo" href="/home">Nike</a>
+  
+</header>
+{% block body %}
+  
+{% endblock body %}
+<div class="main-wrapper">
+  <div class="container-box">
+
+    <div class="left">
+      <img class="shoe"
+        src="https://cdn.pixabay.com/photo/2023/05/03/22/43/tennis-7968714_640.png">
+    </div>
+
+    <div class="right">
+      <div class="form-box">
+        <img class="nike-small-logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg">
+
+        <form autocomplete="off" method="POST" action="/login">
+          <label>Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+          <label>Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+          
+
+          <button>Login</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

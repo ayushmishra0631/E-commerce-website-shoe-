@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{{ item.name }} | Nike</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ===== GLOBAL ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1b1b25, #0f0f14);
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: #ff6a00;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: #ddd;
+      margin-left: 25px;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: #ff6a00;
+      left: 0;
+      bottom: -5px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff6a00;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ===== MAIN HERO / ORDER SECTION ===== */
+    .main {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 40px;
+      background: linear-gradient(135deg, #1e1e2a, #14141c);
+      border-radius: 28px;
+      display: flex;
+      gap: 50px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .product-image img {
+      max-width: 400px;
+      border-radius: 20px;
+      transform: rotate(-10deg);
+      filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.7));
+      transition: transform 0.4s;
+    }
+
+    .product-image img:hover {
+      transform: rotate(-10deg) scale(1.05);
+    }
+
+    .product-details {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .product-details h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ff6a00;
+      margin-bottom: 25px;
+    }
+
+    .size-section {
+      margin-bottom: 30px;
+    }
+
+    .size-section h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .sizes {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .size-option {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .size-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .size-option span {
+      display: block;
+      padding: 12px 18px;
+      background: #2a2a36;
+      border: 2px solid #444;
+      border-radius: 12px;
+      color: #ddd;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .size-option:hover span {
+      background: #3a3a48;
+      border-color: #ff6a00;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(255, 106, 0, 0.4);
+    }
+
+    .size-option input[type="radio"]:checked+span {
+      background: #ff6a00;
+      color: #fff;
+      border-color: #ff6a00;
+      box-shadow: 0 5px 15px rgba(255, 106, 0, 0.5);
+    }
+
+    .btn-buy {
+      background: linear-gradient(135deg, #ff6a00, #ff9a3c);
+      border: none;
+      padding: 15px 35px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-buy:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 106, 0, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      .main {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .product-image img {
+        max-width: 100%;
+      }
+
+      nav a {
+        margin-left: 15px;
+      }
+    }
+    /* ===============================
+   RESPONSIVE IMPROVEMENTS
+================================ */
+
+/* Tablets */
+@media (max-width: 992px) {
+  header {
+    padding: 16px 30px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .main {
+    gap: 30px;
+    padding: 30px;
+  }
+
+  .product-details h1 {
+    font-size: 2.4rem;
+  }
+
+  .price {
+    font-size: 1.8rem;
+  }
+
+  .product-image img {
+    max-width: 320px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 20px;
+  }
+
+  nav a {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .main {
+    flex-direction: column;
+    padding: 22px;
+    margin: 30px 15px;
+    text-align: center;
+  }
+
+  .product-image img {
+    max-width: 260px;
+    transform: rotate(-6deg);
+  }
+
+  .product-details h1 {
+    font-size: 2rem;
+  }
+
+  .price {
+    font-size: 1.6rem;
+  }
+
+  .sizes {
+    justify-content: center;
+  }
+
+  .size-option span {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .btn-buy,
+  button.btn-warning {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 20px;
+  }
+
+  .product-details h1 {
+    font-size: 1.6rem;
+  }
+
+  .price {
+    font-size: 1.4rem;
+  }
+
+  .product-image img {
+    max-width: 220px;
+  }
+
+  .size-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .size-option span {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <a href="/home" class="logo">Nike</a>
+    <nav>
+      
+      <a href="/home">Back</a>
+    </nav>
+  </header>
+{% block bodyy %}
+  
+{% endblock bodyy%}
+  <!-- ORDER FORM -->
+  <form method="POST" action="/buy">
+    <main class="main">
+      {% if item %}
+      <!-- PRODUCT IMAGE -->
+      <div class="product-image">
+        <img src="{{ url_for('static', filename='uploads/' + item.image) }}" alt="{{ item.name }}">
+      </div>
+
+      <!-- PRODUCT DETAILS -->
+      <div class="product-details">
+        <h1>{{ item.name }}
+          <input type="hidden" name="name" value="{{ item.name }}">
+        </h1>
+        <div class="price">₹ {{ item.price }}
+          <input type="hidden" name="price" value="{{ item.price }}">
+        </div>
+
+        <!-- SIZE SELECTION -->
+        <div class="size-section">
+          <h3>Select Size</h3>
+          <div class="sizes">
+            {% for s in [6,7,8,9,10] %}
+            <label class="size-option">
+              <input type="radio" name="size" value="{{ s }}" required>
+              <span>{{ s }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- BUY BUTTON -->
+        <button type="submit"class="btn btn-warning" >
+      Submit
+      <span></span>
+    </button>
+      {% endif %}
+    </main>
+  </form>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

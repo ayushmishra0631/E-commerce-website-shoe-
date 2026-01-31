@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Users & Orders | Nike</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at top, #1b1b25, #121218);
+            color: #eee;
+            padding-top: 90px;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px clamp(20px,6vw,80px);
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            color: #ff6a00;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ccc;
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            background: #ff6a00;
+            left: 0;
+            bottom: -5px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff6a00;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .main-wrapper {
+            min-height: calc(100vh - 90px);
+            padding: 40px clamp(20px, 5vw, 60px);
+        }
+
+        .container-box {
+            background: #1e1e2a;
+            border-radius: 18px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            padding: 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #2a2a36, #1e1e2a);
+        }
+
+        .page-header h1 {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            color: #fff;
+        }
+
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(135deg, #ff6a00, #ff8c00);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255,106,0,0.4);
+        }
+
+        .home-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,106,0,0.6);
+            color: #fff;
+        }
+
+        /* ===== USER CARDS ===== */
+        .user-card {
+            background: #2a2a36;
+            margin: 30px 40px;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            overflow: hidden;
+            border: 1px solid #6c6c6c; /* GREY BORDER */
+            transition: 0.3s;
+        }
+
+        .user-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+        }
+
+        .user-header {
+            padding: 30px 40px;
+            background: linear-gradient(135deg, #ff6a00, #ff8c00);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-header h2 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .user-details {
+            padding: 30px 40px 20px;
+        }
+
+        .table-container {
+            padding: 0 40px 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #1e1e2a;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        th {
+            background: linear-gradient(135deg, #ff6a00, #ff8c00);
+            color: #fff;
+            padding: 18px 16px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            color: #ddd;
+        }
+
+        tr:hover td {
+            background: rgba(255,106,0,0.1);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .no-orders {
+            padding: 40px;
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .user-card {
+                margin: 20px;
+            }
+            .user-header, .user-details, .table-container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <a class="logo" href="/home">Nike</a>
+    <nav>
+        <a class="dropdown-item" href="/edit">Edit</a>
+    </nav>
+</header>
+
+<div class="main-wrapper">
+    <div class="container-box">
+        <div class="page-header">
+            <h1>All Registered Users & Their Orders</h1>
+            <a class="home-link" href="/home">← Back to Home</a>
+        </div>
+
+        {% for user in user %}
+        <div class="user-card">
+            <div class="user-header">
+                <h2>{{ user.customer_name }}</h2>
+            </div>
+
+            <div class="user-details">
+                <table>
+                    <tr><th>ID</th><td>{{ user.id }}</td></tr>
+                    <tr><th>Phone</th><td>{{ user.phone }}</td></tr>
+                    <tr><th>Address</th><td>{{ user.address }}</td></tr>
+                </table>
+            </div>
+
+            <div class="table-container">
+                <h3 style="color:#ff6a00;margin-bottom:20px;">Orders History</h3>
+
+                {% set order = order | selectattr('user_id', 'equalto', user.id) | list %}
+                {% if order %}
+                <table>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Shoe Name</th>
+                        <th>Size</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for order in order %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.name }}</td>
+                        <td>{{ order.size }}</td>
+                        <td>₹{{ "%.2f"|format(order.price) }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% else %}
+                <div class="no-orders">No orders placed by this user yet.</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
